@@ -1,0 +1,12 @@
+fastapi
+pydantic
+uvicorn
+pymongo
+dnspython
+passlib
+cryptography
+openpyxl
+python-jose
+pydantic[email]
+motor
+python-multipart
