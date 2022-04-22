@@ -8,7 +8,7 @@ from core.hashing import Hash
 from db.database import db
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl= settings.API_V1_PATH + "/users/token")
 
 async def authenticate_user(username: str, password: str):
     user = await get_user_from_db(username)
@@ -20,6 +20,8 @@ async def authenticate_user(username: str, password: str):
 
 async def get_user_from_db(username: str):
     user = await db["users"].find_one({"username": username})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail = f'Wrong Username or password')
     return UserInDB(**user)
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
