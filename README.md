@@ -1,4 +1,6 @@
+<p align="center">
 ![Logo](/Sun.Day.png)
+</p>
 
 # Sun.Day Web Application
 
