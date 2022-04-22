@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import users, customers
+from routers.api.v1 import users, customers, tasks
+from core.config import settings
 
 app = FastAPI()
 
@@ -20,16 +21,21 @@ app.add_middleware(
 
 app.include_router(
 	users.router, 
-	prefix="/users", 
-	tags=["users"]
+	prefix= settings.API_V1_PATH + "/users", 
+	tags=["Users"]
 )
 
 app.include_router(
 	customers.router, 
-	prefix="/customers", 
-	tags=["customers"]
+	prefix= settings.API_V1_PATH + "/customers", 
+	tags=["Customers"]
 )
 
+app.include_router(
+	tasks.router, 
+	prefix= settings.API_V1_PATH + "/tasks", 
+	tags=["Tasks"]
+)
 
 @app.get("/")
 async def root():
