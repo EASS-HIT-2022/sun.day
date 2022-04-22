@@ -21,7 +21,7 @@ To run this project, you will need to edit the following environment variables i
    ```sh
    git clone https://github.com/EASS-HIT-2022/sun.day.git
    ```
-2. Enter your MongoDB Atlas credentials in `Dockerfile`
+2. Enter your MongoDB Atlas credentials in `backend/Dockerfile`
    ```
    ENV DATABASE_USER=<your_user>
 
