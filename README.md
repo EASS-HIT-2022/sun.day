@@ -1,4 +1,5 @@
 ![Logo](/Sun.Day.png)
+
 # Sun.Day Web Application
 
 Sun.Day this is a simple web application that I developed in part of "EASS-HIT-2022" course, 
