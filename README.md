@@ -19,7 +19,7 @@ I developed it to manage my clients and the tasks of each of them.
 To run this project, you will need to edit the following environment variables in Dockerfile
 1. Clone the repo
    ```sh
-   git clone https://github.com/EASS-HIT-2022/sun.day-app.git
+   git clone https://github.com/EASS-HIT-2022/sun.day.git
    ```
 2. Enter your MongoDB Atlas credentials in `Dockerfile`
    ```
