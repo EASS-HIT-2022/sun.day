@@ -1,6 +1,8 @@
 import os
 
 class Settings:
+    API_V1_PATH = '/api/v1'
+
     PROJECT_NAME: str = "Sun.Day"
     PROJECT_AUTHOR: str = "Niv Huga"
     PROJECT_VERSION: str = "1.0.0"
