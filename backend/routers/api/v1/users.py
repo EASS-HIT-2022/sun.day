@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from models.users import User
+from models.users import User,UserInDB,UserOutDB
 from models.tokens import Token
 from db.database import db
 from core.hashing import Hash
@@ -11,23 +11,24 @@ from core.config import settings
 
 router = APIRouter()
 
-@router.get("/")
-def read_root(current_user:User = Depends(get_current_user)):
-	return {"data":"Hello World"}
-
+# @route POST /api/v1/users/register
+# @desc Register a new user
+# @access Public
 @router.post('/register')
-async def create_user(request:User):
+async def create_user(request:UserInDB):
 	user = await db["users"].find_one({"username": request.username})
 	if user:
-		raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user already exists")
+		raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= f"User with username {request.username} already exists")
 
 	hashed_pass = Hash.bcrypt(request.password)
 	user_object = dict(request)
 	user_object["password"] = hashed_pass
 	user_id = await db["users"].insert_one(user_object)
-	return {"res":"created"}
+	return {"msg": "user created successfully"}
 
-
+# @route POST /api/v1/users/token
+# @desc Get a token for a user
+# @access Public
 @router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await authenticate_user(form_data.username, form_data.password)
@@ -39,8 +40,11 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"msg": "user logged in successfully","access_token": access_token, "token_type": "bearer"}
 
-@router.get("/me/", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_user)):
-	return current_user
+# @route GET /api/v1/users/me
+# @desc Get the current user
+# @access Private
+@router.get("/me", response_model=User)
+async def read_users_me(current_user: UserOutDB = Depends(get_current_user)):
+    return current_user
