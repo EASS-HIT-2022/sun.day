@@ -27,15 +27,17 @@ To run this project, you will need to edit the following environment variables i
 
    ENV DATABASE_PASSWORD=<your_password>
    ```
+   For test you can set: DATABASE_USER=nivh ,DATABASE_PASSWORD=1234566    
+
 3. Docker build
    ```sh
-   cd <your_path>/sun.day-app/backend
+   cd <your_path>/sun.day/backend
 
    docker build -t sunday-backend .
    ```
 4. Docker run
    ```sh
-   docker run -d -p 8080:8080 sunday-backend
+   docker run -d --name sunday-backend-container -p 8080:8080 sunday-backend
    ```
 5. That's all, The API server running and listen at http://localhost:8080/docs
 ## Roadmap
@@ -46,6 +48,11 @@ To run this project, you will need to edit the following environment variables i
     - [ ] Login \ Register
 - [ ] Third microservice: Database MongoDB
 
+6. To run pytest:
+   ```sh
+   docker exec -ti sunday-backend-container bash
+   pytest
+   ```
 ```sh
 Project tree:
 

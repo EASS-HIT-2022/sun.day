@@ -10,3 +10,5 @@ python-jose
 pydantic[email]
 motor
 python-multipart
+pytest
+requests

@@ -18,8 +18,12 @@ ADD models ./models
 
 ADD db ./db
 
+ADD tests ./tests
+
 ENV DATABASE_USER=<your_user>
 
 ENV DATABASE_PASSWORD=<your_password>
+
+ENV PYTHONPATH "${PYTHONPATH}:/code"
 
 CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8080"]
