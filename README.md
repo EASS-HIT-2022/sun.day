@@ -40,6 +40,11 @@ To run this project, you will need to edit the following environment variables i
    docker run -d --name sunday-backend-container -p 8080:8080 sunday-backend
    ```
 5. That's all, The API server running and listen at http://localhost:8080/docs
+6. To run pytest:
+   ```sh
+   docker exec -ti sunday-backend-container bash
+   pytest
+   ```
 ## Roadmap
 
 - [x] First microservice: Backend with FastAPI & Pydantic
@@ -48,11 +53,6 @@ To run this project, you will need to edit the following environment variables i
     - [ ] Login \ Register
 - [ ] Third microservice: Database MongoDB
 
-6. To run pytest:
-   ```sh
-   docker exec -ti sunday-backend-container bash
-   pytest
-   ```
 ```sh
 Project tree:
 
