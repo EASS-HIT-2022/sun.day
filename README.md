@@ -7,7 +7,7 @@
 Sun.Day this is a simple web application that I developed in part of "EASS-HIT-2022" course,
 I developed it to manage my clients and the tasks of each of them.
 
-![Application Design](assets/ApplicationDesign.svg)
+![Application Design](assets/ApplicationDesign.png)
 
 ## Requirements
 
