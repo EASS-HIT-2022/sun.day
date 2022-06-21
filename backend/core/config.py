@@ -9,7 +9,9 @@ class Settings:
 
     DATABASE_USER: str = os.getenv("DATABASE_USER")
     DATABASE_PASSWORD: str = os.getenv("DATABASE_PASSWORD")
-    DATABASE_URL = f"mongodb+srv://{DATABASE_USER}:{DATABASE_PASSWORD}@cluster0.dbayw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    DATABASE_HOST: str = os.getenv("DATABASE_HOST")
+    DATABASE_PORT: str = os.getenv("DATABASE_PORT")
+    DATABASE_URL = "mongodb://{user}:{password}@{host}:{port}".format(user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST, port=DATABASE_PORT)
 
     SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
     ALGORITHM = "HS256"
