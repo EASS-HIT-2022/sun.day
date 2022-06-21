@@ -1,0 +1,52 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: sunday-frontend
+    networks:
+      - sunday-network
+    depends_on:
+      - backend
+    environment:
+      - API_URL=http://localhost:8080
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: sunday-backend
+    networks:
+      - sunday-network
+    depends_on:
+      - database
+    environment:
+      - DATABASE_USER=sunday
+      - DATABASE_PASSWORD=123456
+      - DATABASE_HOST=database
+      - DATABASE_PORT=27017
+
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: sunday-database
+    networks:
+      - sunday-network
+    volumes:
+      - ./db:/data/db
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=sunday
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+      - MONGO_INITDB_DATABASE=sunday
+
+networks:
+  sunday-network:
+    name: sunday-network
+    driver: bridge
