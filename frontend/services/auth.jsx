@@ -1,4 +1,8 @@
-const API_URL = "http://localhost:8080/api/v1/users/";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
+
+const API_URL = publicRuntimeConfig.API_URL + "/api/v1/users/";
 
 const login = async (email, password) => {
   const response = await fetch(API_URL + "token", {
