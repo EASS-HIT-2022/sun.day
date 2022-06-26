@@ -18,53 +18,18 @@ I developed it to manage my clients and the tasks of each of them.
 
 ### Installation
 
-To run this project, you will need to edit the following environment variables in Dockerfile
+To run this project, you will need to do the following steps:
 
 1. Clone the repo
    ```sh
    git clone https://github.com/EASS-HIT-2022/sun.day.git
    ```
-2. Enter your MongoDB Atlas credentials in `backend/Dockerfile`
-
-   ```
-   ENV DATABASE_USER=<your_user>
-
-   ENV DATABASE_PASSWORD=<your_password>
-   ```
-
-   For test you can set: DATABASE_USER=nivh ,DATABASE_PASSWORD=1234566
-
-3. Docker build
-
+2. Go to the main folder of the project: `cd sun.day/`
+3. Run all containers (frontend, backend, database) with docker-compose
    ```sh
-   cd <your_path>/sun.day/backend
-
-   docker build -t sunday-backend .
+   docker-compose up
    ```
-
-4. Docker run
-   ```sh
-   docker run -d --name sunday-backend-container -p 8080:8080 sunday-backend
-   ```
-5. That's all, The API server running and listen at http://localhost:8080/docs
-6. To run pytest:
-   ```sh
-   docker exec -ti sunday-backend-container bash
-   pytest
-   ```
-7. Part 2 - Docker build Frontend
-
-   ```sh
-   cd <your_path>/sun.day/frontend
-
-   docker build -t sunday-frontend:latest .
-   ```
-
-8. Part 2 - Docker run frontend
-   ```sh
-   docker run -d --name sunday-frontend-container -p 3000:3000 sunday-frontend:latest
-   ```
-9. Enjoy! 🤩 ☁️
+4. Enjoy! 🤩 ☁️
 
    Sun.Day Application is on the air: http://localhost:3000
 
@@ -76,20 +41,26 @@ To run this project, you will need to edit the following environment variables i
 
 ![CustomerPage](/assets/CustomerPage.png)
 
+https://user-images.githubusercontent.com/33636546/175826695-d6354ba7-0bd6-4f83-a563-c7797ed20e4f.mp4
+
 ## Roadmap
 
 - [x] First microservice: Backend with FastAPI & Pydantic
 - [x] Second microservice: Frontend with React.js
   - [x] Welcome Page
-  - [x] Login \ Register
+  - [x] Login / Register
   - [x] Dashboard
-- [ ] Third microservice: Database MongoDB
+  - [x] Customers
+  - [x] Single Customer
+  - [x] Search / Add / Edit / Delete Customer
+- [x] Third microservice: Database MongoDB
 
 ```sh
 Project tree:
 
 .
 ├── README.md
+├── docker-compose.yml
 ├── frontend
 └── backend
     ├── Dockerfile
@@ -120,8 +91,7 @@ Project tree:
                 ├── customers.py
                 ├── tasks.py
                 └── users.py
-
-
+                
 ```
 
 ## Built With
@@ -129,6 +99,8 @@ Project tree:
 **Client:** React (Next.js), TailwindCSS
 
 **Server:** Python, FastAPI
+
+**Database:** MongoDB
 
 ## Support
 
